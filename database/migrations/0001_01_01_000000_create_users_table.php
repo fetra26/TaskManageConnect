@@ -20,6 +20,12 @@ return new class extends Migration
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
+            $table->unsignedBigInteger('status_id')->default(1);
+            $table->foreign('status_id')->references('id')->on('statuses');
+            $table->unsignedBigInteger('role_id')->default(1);
+            $table->foreign('role_id')->references('id')->on('roles');
+            $table->boolean('online_status')->default(false);
+            $table->timestamp('last_seen')->nullable();
             $table->timestamps();
         });
 
