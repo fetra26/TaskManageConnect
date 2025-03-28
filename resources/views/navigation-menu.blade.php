@@ -15,6 +15,13 @@
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Tableau de bord') }}
                     </x-nav-link>
+                    @auth
+                    @if(Auth::user()->currentTeam && Auth::user()->id === Auth::user()->currentTeam->user_id)
+                            <x-nav-link href="{{ route('projets.index') }}" :active="request()->routeIs('projets.*')">
+                                {{ __('Projets') }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
             </div>
 
@@ -142,6 +149,13 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Tableau de bord') }}
             </x-responsive-nav-link>
+            @auth
+            @if(Auth::user()->currentTeam && Auth::user()->id === Auth::user()->currentTeam->user_id)
+                <x-responsive-nav-link href="{{ route('projets.index') }}" :active="request()->routeIs('projets.*')">
+                    {{ __('Projets') }}
+                </x-responsive-nav-link>
+            @endif
+        @endauth
         </div>
 
         <!-- Responsive Settings Options -->
